@@ -1,0 +1,53 @@
+button.setOnClickListener(new View.OnClickListener() {
+
+
+
+            @Override
+            public void onClick(View v) {
+               /* final String rname=mname;
+                final String rgender=mgender;
+                final String rsub =msub;
+                final String rmail=mmail;
+                final String key=mpostkey;
+                //Request request = new Request(key,rname,rgender,rsub,rmail);
+                Users users = new Users(uid,name,email,gender,subject);
+                FirebaseDatabase.getInstance().getReference("request")
+                        .child(mpostkey).setValue(request);
+
+                Toast.makeText(getApplicationContext(),"Request Sent!",Toast.LENGTH_SHORT).show();
+                finish();
+
+                startActivity(new Intent(getApplicationContext(),Findstudyp.class));*/
+
+
+                mDatabaseUser= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
+
+                mDatabaseUser.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        Users userProfileInfo = snapshot.getValue(Users.class);
+                        FirebaseDatabase.getInstance().getReference("request")
+                                .child(mpostkey).child(user.getUid()).setValue(userProfileInfo);
+                        finish();
+
+                        startActivity(new Intent(getApplicationContext(), Findstudyp.class));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+        });
+
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(Pview.this, Findstudyp.class);
+        finish();
+        startActivity(intent);
+    }
