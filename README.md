@@ -1,1 +1,0 @@
-# Kittim-Patshala
