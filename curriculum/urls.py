@@ -6,5 +6,4 @@ urlpatterns = [
 
     path('<str:standard>/<slug:slug>/', views.LessonListView.as_view(), name='lesson_list'),
 
-
-]
+   ]
