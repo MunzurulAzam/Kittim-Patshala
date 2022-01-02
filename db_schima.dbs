@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="Sqlite" id="Project-70f" database="Sqlite" >
+	<schema name="Default" >
+		<table name="app_users_contact" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="150" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="150" jt="12" mandatory="y" />
+			<column name="feedback" type="text" jt="-1" mandatory="y" />
+			<index name="Pk_app_users_contact" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="app_users_userprofileinfo" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="bio" type="varchar" length="500" jt="12" mandatory="y" />
+			<column name="user_type" type="varchar" length="10" jt="12" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="profile_pic" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="Pk_app_users_userprofileinfo" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="Unq_app_users_userprofileinfo_user_id" unique="UNIQUE_KEY" >
+				<column name="user_id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_group" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="150" jt="12" mandatory="y" />
+			<index name="Pk_auth_group" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="Unq_auth_group_name" unique="UNIQUE_KEY" >
+				<column name="name" />
+			</index>
+		</table>
+		<table name="auth_group_permissions" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="group_id" type="integer" jt="4" mandatory="y" />
+			<column name="permission_id" type="integer" jt="4" mandatory="y" />
+			<index name="Pk_auth_group_permissions" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="auth_group" >
+				<fk_column name="group_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="auth_permission" >
+				<fk_column name="permission_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_permission" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="content_type_id" type="integer" jt="4" mandatory="y" />
+			<column name="codename" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" />
+			<index name="Pk_auth_permission" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="django_content_type" >
+				<fk_column name="content_type_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_user" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="password" type="varchar" length="128" jt="12" mandatory="y" />
+			<column name="last_login" type="datetime" jt="93" />
+			<column name="is_superuser" type="boolean" jt="-7" mandatory="y" />
+			<column name="username" type="varchar" length="150" jt="12" mandatory="y" />
+			<column name="last_name" type="varchar" length="150" jt="12" mandatory="y" />
+			<column name="email" type="varchar" length="254" jt="12" mandatory="y" />
+			<column name="is_staff" type="boolean" jt="-7" mandatory="y" />
+			<column name="is_active" type="boolean" jt="-7" mandatory="y" />
+			<column name="date_joined" type="datetime" jt="93" mandatory="y" />
+			<column name="first_name" type="varchar" length="150" jt="12" mandatory="y" />
+			<index name="Pk_auth_user" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="Unq_auth_user_username" unique="UNIQUE_KEY" >
+				<column name="username" />
+			</index>
+		</table>
+		<table name="auth_user_groups" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="group_id" type="integer" jt="4" mandatory="y" />
+			<index name="Pk_auth_user_groups" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="auth_group" >
+				<fk_column name="group_id" pk="id" />
+			</fk>
+		</table>
+		<table name="auth_user_user_permissions" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="permission_id" type="integer" jt="4" mandatory="y" />
+			<index name="Pk_auth_user_user_permissions" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="auth_permission" >
+				<fk_column name="permission_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_comment" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="body" type="text" jt="-1" mandatory="y" />
+			<column name="date_added" type="datetime" jt="93" mandatory="y" />
+			<column name="author_id" type="integer" jt="4" mandatory="y" />
+			<column name="lesson_name_id" type="integer" jt="4" />
+			<column name="comm_name" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="Pk_curriculum_comment" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="author_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_lesson" >
+				<fk_column name="lesson_name_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_lesson" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="250" jt="12" mandatory="y" />
+			<column name="position" type="smallint" jt="5" mandatory="y" />
+			<column name="slug" type="varchar" length="50" jt="12" />
+			<column name="ppt" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="Notes" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="subject_id" type="integer" jt="4" mandatory="y" />
+			<column name="Standard_id" type="integer" jt="4" mandatory="y" />
+			<column name="created_by_id" type="integer" jt="4" mandatory="y" />
+			<column name="created_at" type="datetime" jt="93" mandatory="y" />
+			<column name="lesson_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="video" type="varchar" length="100" jt="12" />
+			<index name="Pk_curriculum_lesson" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="Unq_curriculum_lesson_lesson_id" unique="UNIQUE_KEY" >
+				<column name="lesson_id" />
+			</index>
+			<constraint name="ck_curriculum_lesson_position" >
+				<string><![CDATA[("position" >= 0)]]></string>
+			</constraint>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_subject" >
+				<fk_column name="subject_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_standard" >
+				<fk_column name="Standard_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="created_by_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_reply" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="reply_body" type="text" jt="-1" mandatory="y" />
+			<column name="comment_name_id" type="integer" jt="4" mandatory="y" />
+			<column name="author_id" type="integer" jt="4" mandatory="y" />
+			<column name="date_added" type="datetime" jt="93" mandatory="y" />
+			<index name="Pk_curriculum_reply" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_comment" >
+				<fk_column name="comment_name_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="author_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_slotsubject" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="day_id" type="integer" jt="4" mandatory="y" />
+			<column name="slot_id" type="integer" jt="4" mandatory="y" />
+			<column name="standard_id" type="integer" jt="4" mandatory="y" />
+			<column name="slot_subject_id" type="integer" jt="4" mandatory="y" />
+			<index name="Pk_curriculum_slotsubject" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_workingdays" >
+				<fk_column name="day_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_timeslots" >
+				<fk_column name="slot_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_standard" >
+				<fk_column name="standard_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_subject" >
+				<fk_column name="slot_subject_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_standard" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="slug" type="varchar" length="50" jt="12" />
+			<column name="description" type="text" jt="-1" mandatory="y" />
+			<index name="Pk_curriculum_standard" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="Unq_curriculum_standard_name" unique="UNIQUE_KEY" >
+				<column name="name" />
+			</index>
+		</table>
+		<table name="curriculum_subject" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="name" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="slug" type="varchar" length="50" jt="12" />
+			<column name="standard_id" type="integer" jt="4" mandatory="y" />
+			<column name="image" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="subject_id" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="description" type="text" jt="-1" mandatory="y" />
+			<index name="Pk_curriculum_subject" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="Unq_curriculum_subject_subject_id" unique="UNIQUE_KEY" >
+				<column name="subject_id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_standard" >
+				<fk_column name="standard_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_timeslots" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="start_time" type="time" jt="92" mandatory="y" />
+			<column name="end_time" type="time" jt="92" mandatory="y" />
+			<column name="standard_id" type="integer" jt="4" mandatory="y" />
+			<index name="Pk_curriculum_timeslots" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_standard" >
+				<fk_column name="standard_id" pk="id" />
+			</fk>
+		</table>
+		<table name="curriculum_workingdays" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="day" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="standard_id" type="integer" jt="4" mandatory="y" />
+			<index name="Pk_curriculum_workingdays" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<fk name="Fk" to_schema="Default" to_table="curriculum_standard" >
+				<fk_column name="standard_id" pk="id" />
+			</fk>
+		</table>
+		<table name="django_admin_log" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="action_time" type="datetime" jt="93" mandatory="y" />
+			<column name="object_id" type="text" jt="-1" />
+			<column name="object_repr" type="varchar" length="200" jt="12" mandatory="y" />
+			<column name="change_message" type="text" jt="-1" mandatory="y" />
+			<column name="content_type_id" type="integer" jt="4" />
+			<column name="user_id" type="integer" jt="4" mandatory="y" />
+			<column name="action_flag" type="smallint" jt="5" mandatory="y" />
+			<index name="Pk_django_admin_log" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<constraint name="ck_django_admin_log_action_flag" >
+				<string><![CDATA[("action_flag" >= 0)]]></string>
+			</constraint>
+			<fk name="Fk" to_schema="Default" to_table="django_content_type" >
+				<fk_column name="content_type_id" pk="id" />
+			</fk>
+			<fk name="Fk" to_schema="Default" to_table="auth_user" >
+				<fk_column name="user_id" pk="id" />
+			</fk>
+		</table>
+		<table name="django_content_type" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="app_label" type="varchar" length="100" jt="12" mandatory="y" />
+			<column name="model" type="varchar" length="100" jt="12" mandatory="y" />
+			<index name="Pk_django_content_type" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="django_migrations" spec="" >
+			<column name="id" type="integer" jt="4" mandatory="y" />
+			<column name="app" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="name" type="varchar" length="255" jt="12" mandatory="y" />
+			<column name="applied" type="datetime" jt="93" mandatory="y" />
+			<index name="Pk_django_migrations" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+		</table>
+		<table name="django_session" spec="" >
+			<column name="session_key" type="varchar" length="40" jt="12" mandatory="y" />
+			<column name="session_data" type="text" jt="-1" mandatory="y" />
+			<column name="expire_date" type="datetime" jt="93" mandatory="y" />
+			<index name="Pk_django_session" unique="PRIMARY_KEY" >
+				<column name="session_key" />
+			</index>
+		</table>
+	</schema>
+	<connector name="Sqlite" database="Sqlite" driver_class="org.sqlite.JDBC" driver_jar="sqlite-jdbc-3.36.0.3.jar" driver_desc="Standard" host="localhost" port="7210" instance="C:/Users/tuhin/OneDrive/Desktop/213/CSE327/school_learning_management-main/teaching_blog/db.sqlite3" />
+	<layout name="Main Layout" id="Layout-696" show_relation="columns" >
+		<entity schema="Default" name="app_users_contact" color="3986C1" x="944" y="592" />
+		<entity schema="Default" name="app_users_userprofileinfo" color="C7F4BE" x="992" y="176" />
+		<entity schema="Default" name="auth_group" color="C7F4BE" x="1664" y="400" />
+		<entity schema="Default" name="auth_group_permissions" color="C7F4BE" x="1840" y="400" />
+		<entity schema="Default" name="auth_permission" color="C7F4BE" x="1456" y="80" />
+		<entity schema="Default" name="auth_user" color="C7F4BE" x="1248" y="80" />
+		<entity schema="Default" name="auth_user_groups" color="C7F4BE" x="1456" y="400" />
+		<entity schema="Default" name="auth_user_user_permissions" color="C7F4BE" x="1200" y="400" />
+		<entity schema="Default" name="curriculum_comment" color="F4DDBE" x="496" y="592" />
+		<entity schema="Default" name="curriculum_lesson" color="F4DDBE" x="288" y="496" />
+		<entity schema="Default" name="curriculum_reply" color="F4DDBE" x="720" y="592" />
+		<entity schema="Default" name="curriculum_slotsubject" color="F4DDBE" x="512" y="288" />
+		<entity schema="Default" name="curriculum_standard" color="F4DDBE" x="288" y="288" />
+		<entity schema="Default" name="curriculum_subject" color="F4DDBE" x="80" y="496" />
+		<entity schema="Default" name="curriculum_timeslots" color="F4DDBE" x="64" y="80" />
+		<entity schema="Default" name="curriculum_workingdays" color="F4DDBE" x="48" y="304" />
+		<entity schema="Default" name="django_admin_log" color="BED3F4" x="1152" y="704" />
+		<entity schema="Default" name="django_content_type" color="BED3F4" x="1376" y="704" />
+		<entity schema="Default" name="django_migrations" color="BED3F4" x="1376" y="976" />
+		<entity schema="Default" name="django_session" color="BED3F4" x="1152" y="976" />
+		<group name="django_admin_log" color="ECF0F7" >
+			<entity schema="Default" name="django_admin_log" />
+			<entity schema="Default" name="django_content_type" />
+			<entity schema="Default" name="django_migrations" />
+			<entity schema="Default" name="django_session" />
+		</group>
+		<group name="auth_user" color="EEF7EC" >
+			<entity schema="Default" name="auth_user" />
+			<entity schema="Default" name="auth_permission" />
+			<entity schema="Default" name="auth_user_groups" />
+			<entity schema="Default" name="auth_group" />
+			<entity schema="Default" name="auth_group_permissions" />
+			<entity schema="Default" name="auth_user_user_permissions" />
+			<entity schema="Default" name="app_users_userprofileinfo" />
+		</group>
+		<group name="curriculum_standard" color="F7F2EC" >
+			<entity schema="Default" name="curriculum_standard" />
+			<entity schema="Default" name="curriculum_slotsubject" />
+			<entity schema="Default" name="curriculum_lesson" />
+			<entity schema="Default" name="curriculum_comment" />
+			<entity schema="Default" name="curriculum_subject" />
+			<entity schema="Default" name="curriculum_workingdays" />
+			<entity schema="Default" name="curriculum_timeslots" />
+			<entity schema="Default" name="curriculum_reply" />
+		</group>
+	</layout>
+	<layout name="~Layout with Sample Tools" id="Layout-1e99" show_column_type="y" show_relation="columns" >
+		<entity schema="Default" name="app_users_contact" color="3986C1" x="2336" y="640" />
+		<entity schema="Default" name="app_users_userprofileinfo" color="C7F4BE" x="1104" y="368" />
+		<entity schema="Default" name="auth_group" color="C7F4BE" x="1840" y="368" />
+		<entity schema="Default" name="auth_group_permissions" color="C7F4BE" x="2064" y="368" />
+		<entity schema="Default" name="auth_permission" color="C7F4BE" x="1616" y="48" />
+		<entity schema="Default" name="auth_user" color="C7F4BE" x="1360" y="48" />
+		<entity schema="Default" name="auth_user_groups" color="C7F4BE" x="1616" y="368" />
+		<entity schema="Default" name="auth_user_user_permissions" color="C7F4BE" x="1360" y="368" />
+		<entity schema="Default" name="curriculum_comment" color="F4DDBE" x="528" y="544" />
+		<entity schema="Default" name="curriculum_lesson" color="F4DDBE" x="272" y="448" />
+		<entity schema="Default" name="curriculum_reply" color="F4DDBE" x="800" y="544" />
+		<entity schema="Default" name="curriculum_slotsubject" color="F4DDBE" x="528" y="240" />
+		<entity schema="Default" name="curriculum_standard" color="F4DDBE" x="304" y="240" />
+		<entity schema="Default" name="curriculum_subject" color="F4DDBE" x="48" y="192" />
+		<entity schema="Default" name="curriculum_timeslots" color="F4DDBE" x="784" y="240" />
+		<entity schema="Default" name="curriculum_workingdays" color="F4DDBE" x="304" y="48" />
+		<entity schema="Default" name="django_admin_log" color="BED3F4" x="2336" y="48" />
+		<entity schema="Default" name="django_content_type" color="BED3F4" x="2592" y="48" />
+		<entity schema="Default" name="django_migrations" color="BED3F4" x="2592" y="320" />
+		<entity schema="Default" name="django_session" color="BED3F4" x="2336" y="320" />
+		<script name="SQL Editor" id="Editor-1bed" language="SQL" >
+			<string><![CDATA[SELECT id, password, last_login, is_superuser, username, last_name, email, is_staff, is_active, date_joined, first_name
+FROM
+	auth_user r;]]></string>
+		</script>
+		<query id="Query-956" name="Query Builder" >
+			<query_table schema="Default" name="auth_user" alias="au" x="48" y="48" >
+				<column name="id" />
+				<column name="password" />
+				<column name="last_login" />
+				<column name="is_superuser" />
+				<column name="username" />
+				<column name="last_name" />
+				<column name="email" />
+				<column name="is_staff" />
+				<column name="is_active" />
+				<column name="date_joined" />
+				<column name="first_name" />
+				<query_table schema="Default" name="app_users_userprofileinfo" alias="auu" x="224" y="48" fk="Fk" type="Inner Join" >
+					<column name="id" />
+					<column name="bio" />
+					<column name="user_type" />
+					<column name="user_id" />
+					<column name="profile_pic" />
+				</query_table>
+			</query_table>
+		</query>
+		<form name="Report &amp; Charts" id="Report-1abc" template="Page" css="container-fluid" view="frame" >
+			<var name="samplePageNumber" type="4" value="0" mandatory="n" />
+			<var name="sampleRecordsPerPage" type="4" value="100" mandatory="n" />
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2,-2,-2,-2,-1},{-2,-2,-2,-2}}" scroll="n" html="n" >
+				<cell type="label" name="Auth_user Data" template="H3" pos="0,0,1,0,l,c" />
+				<cell type="label" name="&lt;i&gt;Extend this report with master-detail tables, buttons, images, etc. Click any cell to:&#10;&lt;ul&gt;&lt;li&gt;Edit its component. &#10;&lt;li&gt;Create new component in empty cells. &#10;&lt;li&gt;Add new rows or columns. &#10;&lt;li&gt;Merge cells. &#10;&lt;/ul&gt; Tables have their own cells and data source script. Details in Help and Quick Tour." template="Plain" pos="2,0,4,0,l,c" />
+				<cell type="chart" name="Line" template="Line" pos="0,1,4,1,l,c" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="id" type="4" />
+						<var name="password" type="-1" />
+						<var name="last_login" type="93" />
+						<var name="is_superuser" type="-7" />
+						<var name="username" type="-1" />
+						<var name="last_name" type="-1" />
+						<var name="email" type="-1" />
+						<var name="is_staff" type="-7" />
+						<var name="is_active" type="-7" />
+						<var name="date_joined" type="93" />
+						<var name="first_name" type="-1" />
+						<script ><![CDATA[SELECT * FROM auth_user]]></script>
+					</form_script>
+				</cell>
+				<tableview name="sample" template="Table" css="table table-striped table-sm table-hover" pos="0,2,4,2,f,f" layout="{{-2,-2,-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="id" type="4" />
+						<var name="password" type="-1" />
+						<var name="last_login" type="93" />
+						<var name="is_superuser" type="-7" />
+						<var name="username" type="-1" />
+						<var name="last_name" type="-1" />
+						<var name="email" type="-1" />
+						<var name="is_staff" type="-7" />
+						<var name="is_active" type="-7" />
+						<var name="date_joined" type="93" />
+						<var name="first_name" type="-1" />
+						<script ><![CDATA[SELECT * FROM auth_user]]></script>
+					</form_script>
+					<cell type="label" name="id" pos="0,0,0,0,c,c" />
+					<cell type="label" name="password" pos="1,0,1,0,c,c" />
+					<cell type="label" name="last_login" pos="2,0,2,0,c,c" />
+					<cell type="label" name="is_superuser" pos="3,0,3,0,c,c" />
+					<cell type="label" name="username" pos="4,0,4,0,c,c" />
+					<cell type="label" name="last_name" pos="5,0,5,0,c,c" />
+					<cell type="label" name="Button can be configured to&lt;br&gt; open another sheet as page or dialog." pos="6,0,6,0,c,c" />
+					<cell type="label" name="${id}" template="Plain" pos="0,1,0,1,l,c" />
+					<cell type="label" name="${password}" template="Plain" pos="1,1,1,1,l,c" />
+					<cell type="label" name="${last_login}" template="Plain" pos="2,1,2,1,l,c" />
+					<cell type="label" name="${is_superuser}" template="Plain" pos="3,1,3,1,l,c" />
+					<cell type="label" name="${username}" template="Plain" pos="4,1,4,1,l,c" />
+					<cell type="label" name="${last_name}" template="Plain" pos="5,1,5,1,l,c" />
+					<cell type="button" name="More" template="Plain" css="btn btn-default btn-success" pos="6,1,6,1,c,c" ref_id="Report-1abc" />
+				</tableview>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="0,3,0,3,l,c" glyph="FA-ANGLE_DOUBLE_LEFT" ref_id="Report-1abc" >
+					<var name="samplePageNumber" value="0" />
+				</cell>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="1,3,1,3,l,c" glyph="FA-ANGLE_LEFT" ref_id="Report-1abc" >
+					<var name="samplePageNumber" value="${Math.max(0,samplePageNumber-1)}" />
+				</cell>
+				<cell type="label" name="Page ${samplePageNumber+1}" pos="2,3,2,3,l,c" />
+				<cell type="href" name="" disabled="${!sampleHasNextPage}" pos="3,3,3,3,l,c" glyph="FA-ANGLE_RIGHT" ref_id="Report-1abc" >
+					<var name="samplePageNumber" value="${( samplePageNumber+1 )}" />
+				</cell>
+			</body>
+		</form>
+	</layout>
+</project>
