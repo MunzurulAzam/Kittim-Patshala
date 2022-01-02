@@ -24,6 +24,15 @@ class Lesson(models.Model):
     def __str__(self):
         return self.name
 
+    """
+            Save the current instance. Override this in a subclass if you want to
+            control the saving process.
+
+            The 'force_insert' and 'force_update' parameters can be used to insist
+            that the "save" must be an SQL insert or update (or equivalent for
+            non-SQL backends), respectively. Normally, they should not be set.
+            """
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
